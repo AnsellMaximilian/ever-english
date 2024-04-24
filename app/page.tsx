@@ -2,11 +2,25 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import wave from "@/assets/images/wave.svg";
 import icon from "@/assets/images/icon.svg";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import logofull from "@/assets/images/logo-full-horizontal.svg";
 
 export default function Home() {
   return (
     <main className="">
+      <header className="p-4">
+        <nav className="flex items-center gap-8 justify-between">
+          <div>
+            <Image src={logofull} width={300} height={84.25} alt="logo full" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost">Login</Button>
+            <Button className="font-semibold">Register</Button>
+          </div>
+        </nav>
+      </header>
       <section>
         <div className="text-center py-24">
           <Image
@@ -23,9 +37,15 @@ export default function Home() {
             Let Google&apos;s Gemini AI take your English Skills to the next
             level
           </p>
-          <Button className="font-bold text-2xl py-8 px-6 hover:bg-secondPrimary">
+          <Link
+            href="/dashboard"
+            className={cn(
+              buttonVariants(),
+              "font-bold text-2xl py-8 px-6 hover:bg-secondPrimary"
+            )}
+          >
             Get Started
-          </Button>
+          </Link>
         </div>
         <Image
           src={wave}
