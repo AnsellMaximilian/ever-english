@@ -14,9 +14,7 @@ const NavLink = ({ ...props }: PropsWithChildren<LinkProps>) => {
       {...props}
       className={cn(
         "font-bold",
-        isActive
-          ? "bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondPrimary"
-          : "text-black"
+        isActive ? "main-colors-gradient" : "text-black"
       )}
     >
       {children}

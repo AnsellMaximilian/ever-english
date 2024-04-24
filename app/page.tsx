@@ -17,10 +17,11 @@ export default function Home() {
             className="w-64 block mx-auto mb-16"
           />
           <h1 className="font-bold text-5xl tracking-tighter mb-2">
-            Level Up Your Braskibra
+            Level Up Your <span className="main-colors-gradient">English</span>
           </h1>
           <p className="font-semibold text-3xl mb-6">
-            Let Google's Gemini AI take your ... to the next level
+            Let Google&apos;s Gemini AI take your English Skills to the next
+            level
           </p>
           <Button className="font-bold text-2xl py-8 px-6 hover:bg-secondPrimary">
             Get Started

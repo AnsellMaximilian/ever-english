@@ -76,4 +76,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .main-colors-gradient {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--primary)),
+      hsl(var(--primary)) 50%,
+      hsl(var(--secondPrimary)) 50%,
+      hsl(var(--secondPrimary))
+    );
+    color: transparent;
+    background-clip: text;
+  }
 }
