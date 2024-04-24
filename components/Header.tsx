@@ -12,11 +12,11 @@ const linkItems = [
 export default function Header() {
   return (
     <header className="p-4">
-      <nav>
+      <nav className="flex items-center gap-8">
         <div>
-          {/* <Image src={logofull} width={300} height={84.25} alt="logo full" /> */}
+          <Image src={logofull} width={300} height={84.25} alt="logo full" />
         </div>
-        <ul className="flex gap-2 items-center">
+        <ul className="flex gap-2 items-center text-xl">
           {linkItems.map((link, index) => (
             <li key={link.href + index}>
               <NavLink href={link.href}>{link.name}</NavLink>
