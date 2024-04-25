@@ -8,27 +8,15 @@ import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import useAuth from "./hooks/useAuth";
+import { Loader2 } from "lucide-react";
 
 export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
-  const [loggedInUser, setLoggedInUser] =
-    useState<null | Models.User<Models.Preferences>>(null);
+  const { login, register, isLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
-
-  const login = async (email: string, password: string) => {
-    const session = await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get());
-    router.push("/dashboard");
-  };
-
-  const register = async () => {
-    const res = await account.create(ID.unique(), email, password, name);
-    await login(email, password);
-
-    console.log(res);
-  };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -36,7 +24,7 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
       login(email, password);
     } else {
       console.log("registering");
-      register();
+      register(email, password, name);
     }
   };
 
@@ -91,7 +79,15 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
         <Link href="/" className={cn(buttonVariants({ variant: "outline" }))}>
           Cancel
         </Link>
-        <Button>{isLogin ? "Login" : "Sign Up"}</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <Loader2 className="animate-spin" />
+          ) : isLogin ? (
+            "Login"
+          ) : (
+            "Sign Up"
+          )}
+        </Button>
       </div>
     </form>
   );
