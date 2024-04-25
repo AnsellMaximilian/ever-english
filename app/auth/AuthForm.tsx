@@ -46,12 +46,16 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
         <Input
           type="email"
           placeholder="Email"
+          name="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           type="password"
           placeholder="Password"
+          name="password"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -59,12 +63,14 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
           <Input
             type="text"
             placeholder="Name"
+            autoComplete="username"
+            name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         )}
       </div>
-      <div className="text-sm mt-2 text-center">
+      <div className="text-xs mt-2 text-center">
         {!isLogin ? (
           <div>
             Already have an account?{" "}
@@ -74,7 +80,7 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
           </div>
         ) : (
           <div>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/auth/register" className="text-primary">
               Register
             </Link>

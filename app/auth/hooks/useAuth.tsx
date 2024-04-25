@@ -1,3 +1,5 @@
+"use client";
+
 import { account } from "@/appwrite";
 import { Models } from "appwrite";
 import { usePathname, useRouter } from "next/navigation";
@@ -16,7 +18,8 @@ export default function useAuth() {
       const acc = await account.get();
       setCurrentAccount(acc);
     } catch (error) {
-      if (!["/auth/login", "/auth/register"].includes(pathname)) {
+      console.log(error, { test: "Test" });
+      if (!["/auth/login", "/auth/register", "/"].includes(pathname)) {
         router.push("/auth/register");
       }
     } finally {
