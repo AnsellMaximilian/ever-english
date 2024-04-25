@@ -17,7 +17,12 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost">Login</Button>
-            <Button className="font-semibold">Register</Button>
+            <Link
+              href="/auth/register"
+              className={cn(buttonVariants(), "font-semibold")}
+            >
+              Register
+            </Link>
           </div>
         </nav>
       </header>
