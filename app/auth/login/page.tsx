@@ -14,7 +14,7 @@ import AuthForm from "../AuthForm";
 import icon from "@/assets/images/icon.svg";
 import Image from "next/image";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   return (
     <div className="grow bg-[url('/bg.svg')] flex flex-col items-center justify-center bg-cover bg-no-repeat">
       <Card className="w-[350px]">
@@ -22,10 +22,10 @@ export default function RegisterPage() {
           <Link href="/" className="block mx-auto mb-2">
             <Image src={icon} alt="icon" width={75} height={75} />
           </Link>
-          <CardTitle className="text-xl font-semibold">Register</CardTitle>
+          <CardTitle className="text-xl font-semibold">Login</CardTitle>
         </CardHeader>
         <CardContent>
-          <AuthForm />
+          <AuthForm isLogin />
         </CardContent>
       </Card>
     </div>

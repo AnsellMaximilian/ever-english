@@ -6,8 +6,16 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import logofull from "@/assets/images/logo-full-horizontal.svg";
+import { account } from "@/appwrite";
 
-export default function Home() {
+export default async function Home() {
+  let isLoggedIn = false;
+  try {
+    const acc = await account.get();
+    isLoggedIn = true;
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <main className="">
       <header className="p-4">
@@ -16,13 +24,32 @@ export default function Home() {
             <Image src={logofull} width={300} height={84.25} alt="logo full" />
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost">Login</Button>
-            <Link
-              href="/auth/register"
-              className={cn(buttonVariants(), "font-semibold")}
-            >
-              Register
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/dashboard"
+                className={cn(buttonVariants(), "font-semibold")}
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "font-semibold"
+                  )}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className={cn(buttonVariants(), "font-semibold")}
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </nav>
       </header>

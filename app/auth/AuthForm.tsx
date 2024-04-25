@@ -1,9 +1,13 @@
 "use client";
 
-import { account, ID } from "@/appwrite";
-import React, { useState } from "react";
-import { Models } from "appwrite";
+import { account } from "@/appwrite";
+import React, { ForwardedRef, forwardRef, useState } from "react";
+import { ID, Models } from "appwrite";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
   const [loggedInUser, setLoggedInUser] =
@@ -11,46 +15,78 @@ export default function AuthForm({ isLogin = false }: { isLogin?: boolean }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const router = useRouter();
 
   const login = async (email: string, password: string) => {
     const session = await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get());
+    router.push("/dashboard");
   };
 
   const register = async () => {
-    await account.create(ID.unique(), email, password, name);
-    login(email, password);
+    const res = await account.create(ID.unique(), email, password, name);
+    await login(email, password);
+
+    console.log(res);
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    if (isLogin) {
+      login(email, password);
+    } else {
+      console.log("registering");
+      register();
+    }
   };
 
   return (
-    <div>
-      <form className="" onSubmit={handleSubmit}>
-        <div className="space-y-2   ">
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+    <form className="" onSubmit={handleSubmit}>
+      <div className="space-y-2   ">
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {!isLogin && (
           <Input
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </div>
-        <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-      </form>
-    </div>
+        )}
+      </div>
+      <div className="text-sm mt-2 text-center">
+        {!isLogin ? (
+          <div>
+            Already have an account?{" "}
+            <Link href="/auth/login" className="text-primary">
+              Login
+            </Link>
+          </div>
+        ) : (
+          <div>
+            Don't have an account?{" "}
+            <Link href="/auth/register" className="text-primary">
+              Register
+            </Link>
+          </div>
+        )}
+      </div>
+      <div className="flex justify-between mt-4">
+        <Link href="/" className={cn(buttonVariants({ variant: "outline" }))}>
+          Cancel
+        </Link>
+        <Button>{isLogin ? "Login" : "Sign Up"}</Button>
+      </div>
+    </form>
   );
 }
