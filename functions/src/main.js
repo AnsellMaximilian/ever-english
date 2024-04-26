@@ -15,7 +15,6 @@ export default async ({ req, res, log, error }) => {
 
   const user = req.body;
 
-
   try {
     const createdUserLevelObj = await databases.createDocument(
         process.env.MAIN_DATABASE_ID,
@@ -33,13 +32,10 @@ export default async ({ req, res, log, error }) => {
 
     )
 
-    res.json(createdUserLevelObj);
+    return res.json(createdUserLevelObj);
   } catch (e) {
     error("Failed to create document: " + e.message)
     return res.send("Failed to create document")
   }
 
-
-
-  res.send("User level not created");
 };
