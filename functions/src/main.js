@@ -1,36 +1,45 @@
-import { Client } from 'node-appwrite';
+import { Client, Databases, Permission, Role  } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
   //
-  // const client = new Client()
-  //    .setEndpoint('https://cloud.appwrite.io/v1')
-  //    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-  //    .setKey(process.env.APPWRITE_API_KEY);
+  const client = new Client()
+     .setEndpoint('https://cloud.appwrite.io/v1')
+     .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+     .setKey(process.env.APPWRITE_API_KEY);
 
-  // You can log messages to the console
-  log('Hello, Logs!');
 
-  // If something goes wrong, log an error
-  error('Hello, Errors!');
+  const databases = new Databases(client);
 
-  // The `req` object contains the request data
-  if (req.method === 'GET') {
-    // Send a response with the res object helpers
-    // `res.send()` dispatches a string back to the client
-    return res.send('Hello, World!');
+  const user = req.body;
+
+
+  try {
+    const createdUserLevelObj = await databases.createDocument(
+        process.env.MAIN_DATABASE_ID,
+        process.env.USER_LEVELS_COLLECTION_ID,
+        user.$id,
+        {
+          level: "A1",
+          xp: 0,
+        },
+        [
+          Permission.read(Role.any())
+        ]
+
+
+
+    )
+
+    res.json(createdUserLevelObj);
+  } catch (e) {
+    error("Failed to create document: " + e.message)
+    return res.send("Failed to create document")
   }
 
-  log(req);
-  log(req.body);
 
-  // `res.json()` is a handy helper for sending JSON
-  return res.json({
-    motto: 'Build like a team of hundreds_',
-    learn: 'https://appwrite.io/docs',
-    connect: 'https://appwrite.io/discord',
-    getInspired: 'https://builtwith.appwrite.io',
-  });
+
+  res.send("User level not created");
 };
