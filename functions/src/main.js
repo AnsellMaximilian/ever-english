@@ -24,6 +24,7 @@ export default async ({ req, res, log, error }) => {
   }
 
   log(req);
+  log(req.body);
 
   // `res.json()` is a handy helper for sending JSON
   return res.json({
