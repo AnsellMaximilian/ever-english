@@ -14,12 +14,6 @@ const exerciseTypes: ExerciseType[] = [
     exampleJSON: "",
   },
   {
-    key: "IDENTIFY_PARTS_OF_SPEECH",
-    name: "Identify parts of speech",
-    description: "",
-    exampleJSON: "",
-  },
-  {
     key: "FORM_SENTENCE",
     name: "Form sentence",
     description: "Form a sentence from a list of words",
