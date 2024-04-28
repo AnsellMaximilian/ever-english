@@ -1,0 +1,138 @@
+{
+  "exerciseType": "PARTS OF SPEECH MATCH",
+  "level": "A1",
+  "concepts": [
+    "Greetings and introductions",
+    "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
+    "Numbers and counting",
+    "Days of the week, months, and telling time",
+    "Asking and answering simple questions"
+  ],
+  "matchSets": [
+    {
+      "concept": "Greetings and introductions",
+      "pairs": [
+        {
+          "word": "hello",
+          "partOfSpeech": "interjection"
+        },
+        {
+          "word": "goodbye",
+          "partOfSpeech": "interjection"
+        },
+        {
+          "word": "friend",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "nice",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "word": "meet",
+          "partOfSpeech": "verb"
+        }
+      ]
+    },
+    {
+      "concept": "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
+      "pairs": [
+        {
+          "word": "apple",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "shirt",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "chair",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "plate",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "fork",
+          "partOfSpeech": "noun"
+        }
+      ]
+    },
+    {
+      "concept": "Numbers and counting",
+      "pairs": [
+        {
+          "word": "one",
+          "partOfSpeech": "numeral"
+        },
+        {
+          "word": "two",
+          "partOfSpeech": "numeral"
+        },
+        {
+          "word": "three",
+          "partOfSpeech": "numeral"
+        },
+        {
+          "word": "four",
+          "partOfSpeech": "numeral"
+        },
+        {
+          "word": "five",
+          "partOfSpeech": "numeral"
+        }
+      ]
+    },
+    {
+      "concept": "Days of the week, months, and telling time",
+      "pairs": [
+        {
+          "word": "Monday",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "July",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "hour",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "clock",
+          "partOfSpeech": "noun"
+        },
+        {
+          "word": "Wednesday",
+          "partOfSpeech": "noun"
+        }
+      ]
+    },
+    {
+      "concept": "Asking and answering simple questions",
+      "pairs": [
+        {
+          "word": "what",
+          "partOfSpeech": "pronoun"
+        },
+        {
+          "word": "how",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "word": "who",
+          "partOfSpeech": "pronoun"
+        },
+        {
+          "word": "where",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "word": "why",
+          "partOfSpeech": "adverb"
+        }
+      ]
+    }
+  ]
+}

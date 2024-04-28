@@ -2,26 +2,26 @@
   "exercises": [
     {
       "exerciseType": "FILL IN THE BLANKS",
-      "concept": "Academics",
+      "concept": "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
+
       "fillInTheBlanksIncompleteText": [
-        "The",
-        "professor",
-        "presented",
+        "I",
         null,
-        "study",
-        "findings",
+        "apples",
+        "and",
+        "bananas",
         null,
-        "conclusions",
-        "during",
+        "breakfast.",
         null,
-        "lecture."
+        "morning"
       ],
       "fillInTheBlanksChoices": [
-        { "correctIndex": 3, "content": "his" },
-        { "correctIndex": 9, "content": "the" },
-        { "correctIndex": -1, "content": "their" },
-        { "correctIndex": -1, "content": "your" },
-        { "correctIndex": 6, "content": "and" }
+        { "correctIndex": 1, "content": "have" },
+        { "correctIndex": -1, "content": "chocolate" },
+        { "correctIndex": 5, "content": "for" },
+        { "correctIndex": 7, "content": "every" },
+        { "correctIndex": -1, "content": "yesterday" },
+        { "correctIndex": -1, "content": "from" }
       ]
     },
 
