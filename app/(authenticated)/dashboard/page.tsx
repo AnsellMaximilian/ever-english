@@ -1,3 +1,4 @@
+"use client";
 import DashboardModule from "@/components/DashboardModule";
 import Header from "@/components/Header";
 import LevelBar from "@/components/LevelBar";

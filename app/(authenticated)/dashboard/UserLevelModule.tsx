@@ -16,7 +16,7 @@ export default function UserLevelModule() {
         </span>
       </DashboardModule.Title>
       <div className="mx-auto">
-        <LevelBar />
+        <LevelBar totalXp={currentAccount?.userLevel.xp} />
       </div>
       <div className="font-semibold">3000 more points to next level</div>
     </DashboardModule>
