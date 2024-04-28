@@ -7,7 +7,7 @@ import NavLink from "./NavLink";
 import { Button, buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { account } from "@/appwrite";
-import useAuth from "@/app/auth/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
 export default function Header({ landing = false }: { landing?: boolean }) {

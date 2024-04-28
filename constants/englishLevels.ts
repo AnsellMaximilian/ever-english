@@ -1,6 +1,7 @@
 const englishLevels = [
   {
     level: "A1",
+    requiredXp: 1000,
     concepts: [
       "Greetings and introductions",
       "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
@@ -18,6 +19,7 @@ const englishLevels = [
   },
   {
     level: "A2",
+    requiredXp: 2500,
     concepts: [
       "Expanding vocabulary for various topics (e.g., family, hobbies, work)",
       "Describing daily routines and activities",
@@ -36,6 +38,7 @@ const englishLevels = [
   },
   {
     level: "B1",
+    requiredXp: 5000,
     concepts: [
       "Understanding main ideas and details in longer texts and conversations",
       "Expressing wishes, hopes, and regrets using conditional sentences",
@@ -54,6 +57,7 @@ const englishLevels = [
   },
   {
     level: "B2",
+    requiredXp: 7500,
     concepts: [
       "Understanding complex texts on both concrete and abstract topics",
       "Analyzing and evaluating arguments and opinions in written texts",
@@ -72,6 +76,7 @@ const englishLevels = [
   },
   {
     level: "C1",
+    requiredXp: 10000,
     concepts: [
       "Understanding complex and specialized texts in professional and academic domains",
       "Analyzing and critiquing arguments and theories in written texts",
@@ -89,6 +94,7 @@ const englishLevels = [
   },
   {
     level: "C2",
+    requiredXp: 15000,
     concepts: [
       "Understanding virtually all forms of written and spoken communication, including nuanced and technical language",
       "Analyzing and synthesizing information from diverse and challenging sources",

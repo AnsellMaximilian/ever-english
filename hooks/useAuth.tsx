@@ -1,13 +1,18 @@
 "use client";
 
-import { account } from "@/appwrite";
+import { account, databases } from "@/appwrite";
+import appwriteConfObj from "@/appwrite/conf";
+import { UserLevel } from "@/types/data";
 import { ID, Models } from "appwrite";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+export interface User extends Models.User<Models.Preferences> {
+  userLevel: UserLevel;
+}
+
 export default function useAuth() {
-  const [currentAccount, setCurrentAccount] =
-    useState<null | Models.User<Models.Preferences>>(null);
+  const [currentAccount, setCurrentAccount] = useState<null | User>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -16,12 +21,20 @@ export default function useAuth() {
   const getSession = async () => {
     try {
       const acc = await account.get();
-      setCurrentAccount(acc);
+      console.log(acc);
+
+      const userLevel: UserLevel = await databases.getDocument(
+        appwriteConfObj.mainDBId,
+        appwriteConfObj.userLevelsCollectionId,
+        acc.$id,
+        []
+      );
+
+      setCurrentAccount({ ...acc, userLevel });
     } catch (error) {
-      console.log(error, { test: "Test" });
-      if (!["/auth/login", "/auth/register", "/"].includes(pathname)) {
-        router.push("/auth/register");
-      }
+      // if (!["/auth/login", "/auth/register", "/"].includes(pathname)) {
+      //   router.push("/auth/register");
+      // }
     } finally {
       setIsLoading(false);
     }
