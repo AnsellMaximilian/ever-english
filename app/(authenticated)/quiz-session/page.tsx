@@ -25,7 +25,7 @@ export default function QuizzSessionPage() {
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [selectedTypeIndex]);
+  }, [selectedTypeIndex, router]);
   return (
     <div className="grow flex items-center justify-center">
       <div>
