@@ -1,33 +1,34 @@
 "use client";
 import exerciseTypes from "@/constants/exerciseTypes";
 import { cn } from "@/lib/utils";
-import React from "react";
-//  rounded-full border-border border-4  overflow-hidden gap-2
+import React, { useEffect, useState } from "react";
+import ExerciseTypeWheel from "./ExerciseTypeWheel";
+import useExerciseWheel from "@/hooks/useExerciseWheel";
+
 export default function QuizzSessionPage() {
+  // Wheel selection and animation
+  const { currentDisplayedSelectedIndex, selectedTypeIndex } =
+    useExerciseWheel(exerciseTypes);
   return (
-    <div>
-      <div className="grid grid-cols-2 w-[500px] h-[500px] gap-2">
-        {exerciseTypes.map((type, index) => {
-          return (
-            <div
-              key={type.type}
-              className={cn(
-                "border-border border-4 flex items-center justify-center rounded-md relative",
-                index === 0
-                  ? "rounded-tl-full"
-                  : index === 1
-                  ? "rounded-tr-full"
-                  : index === 2
-                  ? "rounded-bl-full"
-                  : "rounded-br-full"
-              )}
-            >
-              <div className="absolute font-bold text-xl right-8 bottom-8">
-                {type.name}
-              </div>
-            </div>
-          );
-        })}
+    <div className="grow flex items-center justify-center">
+      <div>
+        <div className="flex justify-center mt-16">
+          <ExerciseTypeWheel
+            types={exerciseTypes}
+            currentDisplayedSelectedIndex={currentDisplayedSelectedIndex}
+            selectedTypeIndex={selectedTypeIndex}
+          />
+        </div>
+        <h1 className="text-center font-bold text-3xl mt-8">
+          {!selectedTypeIndex
+            ? "Selecting Exercise Type"
+            : `${exerciseTypes[selectedTypeIndex].name} Selected`}
+        </h1>
+        {selectedTypeIndex && (
+          <p className="font-semibold text-xl text-center">
+            {exerciseTypes[selectedTypeIndex].description}
+          </p>
+        )}
       </div>
     </div>
   );

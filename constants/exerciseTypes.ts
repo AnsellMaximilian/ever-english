@@ -9,26 +9,25 @@ const exerciseTypes: ExerciseType[] = [
   {
     type: "ARRANGE SENTENCE",
     name: "Sentence Arrangement",
-    description:
-      "User will be given a sentence with missing words. They are to fill in all the blanks with the correct words.",
+    description: "Arrange a sentence in the correct order.",
     exampleJSON: "",
   },
   {
     type: "COMPREHENSION",
     name: "Comprehension",
-    description: "Form a sentence from a list of words",
+    description: "Test your comprehension skills with reading materials.",
     exampleJSON: "",
   },
   {
     type: "CONVERSATION",
     name: "Conversation",
-    description: "",
+    description: "Practise your conversation skills.",
     exampleJSON: "",
   },
   {
     type: "PARTS OF SPEECH MATCH",
     name: "Parts of Speech",
-    description: "",
+    description: "Match words to the correct parts of speech.",
     exampleJSON: "",
   },
 ];
