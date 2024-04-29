@@ -25,7 +25,7 @@ export default async ({ req, res, log, error }) => {
           xp: 0,
         },
         [
-          Permission.read(Role.any())
+          Permission.read(Role.any()), Permission.update(Role.user(user.$id))
         ]
 
 
