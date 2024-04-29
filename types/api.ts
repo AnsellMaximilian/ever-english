@@ -14,7 +14,7 @@ export interface ConversationExerciseSession extends ExerciseSession {
     concept: string;
     dialog: {
       name: string;
-      content: string;
+      content: string | null;
     }[];
     choices: {
       isCorrect: boolean;

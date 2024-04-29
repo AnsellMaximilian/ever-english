@@ -30,10 +30,7 @@
           "name": "Alice",
           "content": "Definitely. The implications of quantum computing extend far beyond traditional computing paradigms."
         },
-        {
-          "name": "Bob",
-          "content": null
-        }
+        { "name": "Bob", "content": null }
       ],
       "choices": [
         {
@@ -89,10 +86,7 @@
           "name": "Daniel",
           "content": "Precisely. Without rigorous scrutiny, we risk misinterpreting the findings and drawing flawed conclusions."
         },
-        {
-          "name": "Emily",
-          "content": null
-        }
+        { "name": "Emily", "content": null }
       ],
       "choices": [
         {
@@ -148,10 +142,7 @@
           "name": "Sophia",
           "content": "I couldn't agree more. Let's work towards a successful outcome for both parties."
         },
-        {
-          "name": "Alex",
-          "content": null
-        }
+        { "name": "Alex", "content": null }
       ],
       "choices": [
         {
