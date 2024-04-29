@@ -20,11 +20,11 @@ export default function QuizzSessionPage() {
           />
         </div>
         <h1 className="text-center font-bold text-3xl mt-8">
-          {!selectedTypeIndex
+          {selectedTypeIndex === null
             ? "Selecting Exercise Type"
             : `${exerciseTypes[selectedTypeIndex].name} Selected`}
         </h1>
-        {selectedTypeIndex && (
+        {selectedTypeIndex !== null && (
           <p className="font-semibold text-xl text-center">
             {exerciseTypes[selectedTypeIndex].description}
           </p>
