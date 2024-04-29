@@ -6,10 +6,5 @@ export default function AuthenticatedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div>
-      <Header />
-      <main className="p-4 container mx-auto">{children}</main>
-    </div>
-  );
+  return <>{children}</>;
 }

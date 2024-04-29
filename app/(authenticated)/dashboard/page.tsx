@@ -9,19 +9,24 @@ import UserLevelModule from "./UserLevelModule";
 
 function Dashboard() {
   return (
-    <div className="grid grid-cols-12 gap-4">
-      <DashboardModule className="col-span-8">
-        <DashboardModule.Title>Title</DashboardModule.Title>
-        <div>
-          <Link
-            href="/quiz-session"
-            className={cn(buttonVariants(), "font-bold")}
-          >
-            Start a Session
-          </Link>
+    <div>
+      <Header />
+      <main className="p-4 container mx-auto">
+        <div className="grid grid-cols-12 gap-4">
+          <DashboardModule className="col-span-8">
+            <DashboardModule.Title>Title</DashboardModule.Title>
+            <div>
+              <Link
+                href="/quiz-session"
+                className={cn(buttonVariants(), "font-bold")}
+              >
+                Start a Session
+              </Link>
+            </div>
+          </DashboardModule>
+          <UserLevelModule />
         </div>
-      </DashboardModule>
-      <UserLevelModule />
+      </main>
     </div>
   );
 }
