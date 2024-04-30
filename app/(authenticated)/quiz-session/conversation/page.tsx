@@ -8,12 +8,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { getConversationSession } from "@/services/quiz-session/conversation";
 import { ConversationExerciseSession } from "@/types/api";
 import React, { useEffect, useState } from "react";
+import SessionResult from "../SessionResult";
+import { useRouter } from "next/navigation";
+import type { SessionResult as ISessionRes } from "@/types/helpers";
 
 export default function ConversationPage() {
   const [conversationSession, setConversationSession] =
@@ -26,6 +28,13 @@ export default function ConversationPage() {
   const [isCurrentResultCorrect, setIsCurrentResultCorrect] = useState<
     null | boolean
   >(null);
+
+  const [sessionResult, setSessionResult] = useState<ISessionRes>({
+    totalCorrect: 0,
+    resultDetails: [],
+  });
+
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -53,6 +62,11 @@ export default function ConversationPage() {
 
   const isAtEndOfConvo =
     currentConvo && conversationProgress + 1 >= currentConvo.dialog.length;
+
+  const isSessionFinished = !!(
+    conversationSession &&
+    currentConversationIndex >= conversationSession.conversations.length
+  );
   return (
     <div className="grow mx-auto container p-8">
       {currentConvo && (
@@ -106,6 +120,18 @@ export default function ConversationPage() {
                       <button
                         onClick={() => {
                           setIsCurrentResultCorrect(choice.isCorrect);
+                          setSessionResult((prev) => ({
+                            totalCorrect: choice.isCorrect
+                              ? prev.totalCorrect + 1
+                              : prev.totalCorrect,
+                            resultDetails: [
+                              ...prev.resultDetails,
+                              {
+                                text: currentConvo.concept,
+                                isCorrect: choice.isCorrect,
+                              },
+                            ],
+                          }));
                         }}
                         key={index}
                         className="p-4 border-border border-4 hover:border-primary block rounded-md"
@@ -158,6 +184,15 @@ export default function ConversationPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <SessionResult
+        open={isSessionFinished}
+        sessionResult={sessionResult}
+        onOpenChange={(status) => {
+          if (!status) {
+            router.push("/dashboard");
+          }
+        }}
+      />
     </div>
   );
 }

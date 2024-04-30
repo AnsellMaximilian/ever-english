@@ -21,7 +21,6 @@ export default function useAuth() {
   const getSession = async () => {
     try {
       const acc = await account.get();
-      console.log(acc);
 
       const userLevel: UserLevel = await databases.getDocument(
         appwriteConfObj.mainDBId,
