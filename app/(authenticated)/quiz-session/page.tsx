@@ -18,7 +18,7 @@ export default function QuizzSessionPage() {
     let timeoutId: NodeJS.Timeout;
     if (selectedTypeIndex !== null) {
       timeoutId = setTimeout(() => {
-        router.push("/quiz-session/conversation");
+        router.push("/quiz-session/comprehension");
       }, 5000);
     }
 
