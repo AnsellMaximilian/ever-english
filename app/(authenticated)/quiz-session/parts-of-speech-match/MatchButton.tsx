@@ -16,12 +16,13 @@ export default function MatchButton({
 }) {
   return (
     <button
-      disabled
+      disabled={disabled}
       onClick={onClick}
       className={cn(
         "p-4 border-border border-4 rounded-md hover:border-secondPrimary text-xl font-semibold",
         isSelected ? "border-primary" : "",
-        isCorrect ? "border-green-500" : ""
+        isCorrect ? "border-green-500" : "",
+        isSelected && !isCorrect ? "border-red-500" : ""
       )}
     >
       {text}

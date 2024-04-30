@@ -50,6 +50,8 @@ export default function PartsOfSpeechMatchPage() {
   const [currentWordIndex, setCurrentWordIndex] = useState(-1);
   const [currentPartIndex, setCurrentPartIndex] = useState(-1);
 
+  const [isCurrentSetCorrect, setIsCurrentSetCorrect] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -70,6 +72,8 @@ export default function PartsOfSpeechMatchPage() {
   const moveToNextMatchSet = () => {
     setCurrentMatchSetIndex((prev) => prev + 1);
     setIsCurrentResultCorrect(null);
+    setCurrentPartIndex(-1);
+    setCurrentWordIndex(-1);
   };
 
   const currentMatchSet = conversationSession?.matchSets[currentMatchSetIndex];
@@ -107,10 +111,30 @@ export default function PartsOfSpeechMatchPage() {
     }
   }, [currentMatchSet]);
 
-  useEffect(() => {
-    if (currentWordIndex != -1) {
+  const checkWin = (
+    currentWords: StringSelection[],
+    currentMatchSet: PartsOfSpeechMatchExerciseSession["matchSets"][number]
+  ) => {
+    if (
+      currentWords.length > 0 &&
+      currentWords.filter((w) => w.isCorrect).length === currentWords.length &&
+      currentMatchSet
+    ) {
+      console.log("WIN");
+      setIsCurrentResultCorrect(true);
+      setSessionResult((prev) => ({
+        resultDetails: [
+          ...prev.resultDetails,
+          {
+            text: currentMatchSet.concept,
+            isCorrect: true,
+          },
+        ],
+        totalCorrect: prev.totalCorrect + 1,
+      }));
     }
-  }, [currentPartIndex, currentWordIndex]);
+  };
+
   return (
     <div className="grow mx-auto container p-8">
       {currentMatchSet && (
@@ -124,6 +148,9 @@ export default function PartsOfSpeechMatchPage() {
             </p>
           </div>
           <div className="mt-8">
+            <div className="mb-4 text-center text-2xl">
+              Match the words with the correct part of speech
+            </div>
             <div className="grid grid-cols-2 gap-4 max-w-[750px] mx-auto">
               <div className="flex flex-col gap-4">
                 {currentWords.map((word, index) => {
@@ -135,7 +162,45 @@ export default function PartsOfSpeechMatchPage() {
                         currentWordIndex === index || word.hasBeenSelected
                       }
                       isCorrect={word.isCorrect}
-                      onClick={() => setCurrentWordIndex(index)}
+                      onClick={() => {
+                        setCurrentWordIndex(index);
+                        // if a part has already been selected, check if correct word
+                        if (currentPartIndex !== -1) {
+                          const part = currentPartsOfSpeech[currentPartIndex];
+                          const isCorrect = word.match === part.text;
+                          if (!isCorrect) {
+                            setIsCurrentResultCorrect(false);
+                            setSessionResult((prev) => ({
+                              ...prev,
+                              resultDetails: [
+                                ...prev.resultDetails,
+                                {
+                                  text: currentMatchSet.concept,
+                                  isCorrect: false,
+                                },
+                              ],
+                            }));
+                          } else {
+                            const newWords = currentWords.map((p, i) =>
+                              i === index ? { ...p, isCorrect: true } : p
+                            );
+
+                            setCurrentWords(newWords);
+
+                            checkWin(newWords, currentMatchSet);
+
+                            setCurrentPartsOfSpeech((prev) =>
+                              prev.map((p, i) =>
+                                i === currentPartIndex
+                                  ? { ...p, isCorrect: true }
+                                  : p
+                              )
+                            );
+                          }
+                          setCurrentWordIndex(-1);
+                          setCurrentPartIndex(-1);
+                        }
+                      }}
                     />
                   );
                 })}
@@ -157,23 +222,37 @@ export default function PartsOfSpeechMatchPage() {
                         if (currentWordIndex !== -1) {
                           const word = currentWords[currentWordIndex];
                           const isCorrect = word.match === part.text;
-                          if (isCorrect) {
-                            setIsCurrentResultCorrect(true);
+
+                          if (!isCorrect) {
+                            setIsCurrentResultCorrect(false);
                             setSessionResult((prev) => ({
+                              ...prev,
                               resultDetails: [
                                 ...prev.resultDetails,
                                 {
                                   text: currentMatchSet.concept,
-                                  isCorrect,
+                                  isCorrect: false,
                                 },
                               ],
-                              totalCorrect: isCorrect
-                                ? prev.totalCorrect + 1
-                                : prev.totalCorrect,
                             }));
                           } else {
-                            setIsCurrentResultCorrect(false);
+                            setCurrentPartsOfSpeech((prev) =>
+                              prev.map((p, i) =>
+                                i === index ? { ...p, isCorrect: true } : p
+                              )
+                            );
+
+                            const newWords = currentWords.map((p, i) =>
+                              i === currentWordIndex
+                                ? { ...p, isCorrect: true }
+                                : p
+                            );
+                            setCurrentWords(newWords);
+
+                            checkWin(newWords, currentMatchSet);
                           }
+                          setCurrentWordIndex(-1);
+                          setCurrentPartIndex(-1);
                         }
                       }}
                     />
@@ -185,7 +264,12 @@ export default function PartsOfSpeechMatchPage() {
         </div>
       )}
       <Dialog
-        open={isCurrentResultCorrect !== null}
+        open={
+          isCurrentResultCorrect === false ||
+          (currentWords.filter((w) => w.isCorrect).length ===
+            currentWords.length &&
+            currentWords.length > 0)
+        }
         onOpenChange={(open) => {
           if (!open) {
             moveToNextMatchSet();
@@ -206,7 +290,7 @@ export default function PartsOfSpeechMatchPage() {
           <div></div>
           <DialogFooter>
             <Button type="button" onClick={moveToNextMatchSet}>
-              Next Convo
+              Next
             </Button>
           </DialogFooter>
         </DialogContent>
