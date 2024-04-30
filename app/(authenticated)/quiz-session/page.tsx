@@ -18,7 +18,7 @@ export default function QuizzSessionPage() {
     let timeoutId: NodeJS.Timeout;
     if (selectedTypeIndex !== null) {
       timeoutId = setTimeout(() => {
-        router.push("/quiz-session/parts-of-speech-match");
+        router.push("/quiz-session/arrange-sentence");
       }, 5000);
     }
 
