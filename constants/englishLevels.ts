@@ -38,7 +38,7 @@ const englishLevels = [
   },
   {
     level: "B1",
-    requiredXp: 1500,
+    requiredXp: 1750,
     concepts: [
       "Understanding main ideas and details in longer texts and conversations",
       "Expressing wishes, hopes, and regrets using conditional sentences",
