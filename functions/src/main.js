@@ -21,7 +21,7 @@ export default async ({ req, res, log, error }) => {
         process.env.USER_LEVELS_COLLECTION_ID,
         user.$id,
         {
-          level: "A1",
+          level: "A0",
           xp: 0,
         },
         [

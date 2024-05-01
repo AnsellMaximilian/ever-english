@@ -14,7 +14,7 @@ export const getXpFromSessionResult = (sessionResult: SessionResult) => {
 };
 
 export const getUpdatedLevel = (xp: number, engLvls: typeof englishLevels) => {
-  let level = "A1";
+  let level = "A0";
   let currentLevelXpReq = 0;
 
   engLvls.forEach((lvl) => {
