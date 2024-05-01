@@ -53,14 +53,17 @@ export default function SessionResult({
           <div className="text-center">
             <div className="font-semibold text-xl">Total Correct</div>
             <div className="font-bold text-2xl">
-              <CountUp end={sessionResult.totalCorrect} duration={1} />
+              <CountUp
+                end={open ? sessionResult.totalCorrect : 0}
+                duration={1}
+              />
             </div>
           </div>
           <div className="rounded-md bg-accent text-accent-foreground p-4 flex justify-between">
             <div>Total Earned XP</div>{" "}
             <div className="font-bold">
               <CountUp
-                end={getXpFromSessionResult(sessionResult)}
+                end={open ? getXpFromSessionResult(sessionResult) : 0}
                 duration={1}
               />
             </div>
