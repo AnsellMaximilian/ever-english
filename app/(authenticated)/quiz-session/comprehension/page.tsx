@@ -156,7 +156,9 @@ export default function ComprehensionPage() {
                 englishLevels
               );
             }
-            router.push("/dashboard");
+            router.push(
+              `/dashboard?prevLvl=${currentAccount?.userLevel.level}`
+            );
           }
         }}
       />

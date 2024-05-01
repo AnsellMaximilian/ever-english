@@ -209,7 +209,9 @@ export default function ArrangeSentencePage() {
                 englishLevels
               );
             }
-            router.push("/dashboard");
+            router.push(
+              `/dashboard?prevLvl=${currentAccount?.userLevel.level}`
+            );
           }
         }}
       />

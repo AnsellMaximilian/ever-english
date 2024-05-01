@@ -7,8 +7,16 @@ import Link from "next/link";
 import UserLevelModule from "./UserLevelModule";
 import hero from "@/assets/images/session-hero.svg";
 import Image from "next/image";
+import useAuth from "@/hooks/useAuth";
+import LevelUpDialog from "./LevelUpDialog";
+import { useSearchParams } from "next/navigation";
 
 function Dashboard() {
+  const { currentAccount } = useAuth();
+  const searchParams = useSearchParams();
+
+  const prevLvl = searchParams.get("prevLvl");
+
   return (
     <div>
       <Header />
@@ -45,6 +53,11 @@ function Dashboard() {
           </div>
         </div>
       </main>
+      {currentAccount &&
+        prevLvl &&
+        prevLvl != currentAccount.userLevel.level && (
+          <LevelUpDialog level={currentAccount.userLevel} />
+        )}
     </div>
   );
 }

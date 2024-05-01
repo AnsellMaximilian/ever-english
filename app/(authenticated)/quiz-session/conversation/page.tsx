@@ -206,7 +206,9 @@ export default function ConversationPage() {
                 englishLevels
               );
             }
-            router.push("/dashboard");
+            router.push(
+              `/dashboard?prevLvl=${currentAccount?.userLevel.level}`
+            );
           }
         }}
       />
