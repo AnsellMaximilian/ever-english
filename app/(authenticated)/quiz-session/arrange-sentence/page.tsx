@@ -22,6 +22,8 @@ import useExerciseSession from "@/hooks/useExerciseSession";
 import useAuth from "@/hooks/useAuth";
 import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
+import Loading from "@/app/(authenticated)/quiz-session/Loading";
+import { getLvlByName } from "@/utils/level";
 
 export default function ArrangeSentencePage() {
   const [conversationSession, setConversationSession] =
@@ -46,20 +48,19 @@ export default function ArrangeSentencePage() {
 
   useEffect(() => {
     (async () => {
-      const arrangeSession = await getArrangeSentenceSession({
-        concepts: [
-          "Greetings and introductions",
-          "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
-          "Numbers and counting",
-          "Days of the week, months, and telling time",
-          "Asking and answering simple questions",
-        ],
-        englishLevel: "A1",
-      });
+      if (currentAccount) {
+        const lvl = getLvlByName(currentAccount.userLevel.level, englishLevels);
+        if (lvl) {
+          const arrangeSession = await getArrangeSentenceSession({
+            concepts: shuffleArray(lvl.concepts).slice(0, 5),
+            englishLevel: currentAccount.userLevel.level,
+          });
 
-      setConversationSession(arrangeSession);
+          setConversationSession(arrangeSession);
+        }
+      }
     })();
-  }, []);
+  }, [currentAccount]);
 
   const moveToNextSentence = () => {
     setCurrentSentenceIndex((prev) => prev + 1);
@@ -107,8 +108,8 @@ export default function ArrangeSentencePage() {
     setIsCurrentResultCorrect,
   ]);
   return (
-    <div className="grow mx-auto container p-8">
-      {currentSentence && (
+    <div className="grow mx-auto container p-8 flex flex-col">
+      {currentSentence ? (
         <div className="">
           <div>
             <h1 className="text-4xl font-bold text-primary text-center">
@@ -168,6 +169,10 @@ export default function ArrangeSentencePage() {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="grow flex justify-center items-center">
+          <Loading />
         </div>
       )}
       <Dialog

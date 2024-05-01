@@ -9,6 +9,12 @@ import exampleJson from "@/constants/json/exampleConverastion.json";
 export async function getConversationSession(
   sessionReq: QuizSessionRequestBody
 ): Promise<ConversationExerciseSession> {
-  // return (await axios.post("/api/quiz-session", sessionReq)).data;
+  try {
+    return (await axios.post("/api/quiz-session/conversation", sessionReq))
+      .data;
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
   return Promise.resolve(exampleJson);
 }

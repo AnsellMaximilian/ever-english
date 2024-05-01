@@ -52,3 +52,7 @@ export const getNextLevel = (
 
   return nextLevel;
 };
+
+export const getLvlByName = (name: string, engLvls: typeof englishLevels) => {
+  return engLvls.find((lvl) => lvl.level === name);
+};

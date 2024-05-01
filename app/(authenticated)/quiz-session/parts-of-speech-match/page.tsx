@@ -22,6 +22,8 @@ import useExerciseSession from "@/hooks/useExerciseSession";
 import useAuth from "@/hooks/useAuth";
 import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
+import Loading from "@/app/(authenticated)/quiz-session/Loading";
+import { getLvlByName } from "@/utils/level";
 
 interface StringSelection {
   hasBeenSelected: boolean;
@@ -58,18 +60,19 @@ export default function PartsOfSpeechMatchPage() {
 
   useEffect(() => {
     (async () => {
-      const partsSession = await getPartsOfSpeechMatchSession({
-        concepts: [
-          "Understanding complex and specialized texts in professional and academic domains",
-          "Analyzing and critiquing arguments and theories in written texts",
-          "Negotiating and mediating in professional and academic contexts",
-        ],
-        englishLevel: "C1",
-      });
+      if (currentAccount) {
+        const lvl = getLvlByName(currentAccount.userLevel.level, englishLevels);
 
-      setConversationSession(partsSession);
+        if (lvl) {
+          const partsSession = await getPartsOfSpeechMatchSession({
+            concepts: shuffleArray(lvl.concepts).slice(0, 5),
+            englishLevel: currentAccount.userLevel.level,
+          });
+          setConversationSession(partsSession);
+        }
+      }
     })();
-  }, []);
+  }, [currentAccount]);
 
   const moveToNextMatchSet = () => {
     setCurrentMatchSetIndex((prev) => prev + 1);
@@ -122,7 +125,6 @@ export default function PartsOfSpeechMatchPage() {
       currentWords.filter((w) => w.isCorrect).length === currentWords.length &&
       currentMatchSet
     ) {
-      console.log("WIN");
       setIsCurrentResultCorrect(true);
       setSessionResult((prev) => ({
         resultDetails: [
@@ -138,8 +140,8 @@ export default function PartsOfSpeechMatchPage() {
   };
 
   return (
-    <div className="grow mx-auto container p-8">
-      {currentMatchSet && (
+    <div className="grow mx-auto container p-8 flex flex-col">
+      {currentMatchSet ? (
         <div className="">
           <div>
             <h1 className="text-4xl font-bold text-primary text-center">
@@ -263,6 +265,10 @@ export default function PartsOfSpeechMatchPage() {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="grow flex justify-center items-center">
+          <Loading />
         </div>
       )}
       <Dialog

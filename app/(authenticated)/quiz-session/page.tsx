@@ -1,10 +1,8 @@
 "use client";
 import exerciseTypes from "@/constants/exerciseTypes";
-import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ExerciseTypeWheel from "./ExerciseTypeWheel";
 import useExerciseWheel from "@/hooks/useExerciseWheel";
-import { getConversationSession } from "@/services/quiz-session/conversation";
 import { useRouter } from "next/navigation";
 
 export default function QuizzSessionPage() {
@@ -19,7 +17,7 @@ export default function QuizzSessionPage() {
     if (selectedTypeIndex !== null) {
       timeoutId = setTimeout(() => {
         router.push(`/quiz-session/${exerciseTypes[selectedTypeIndex].url}`);
-      }, 5000);
+      }, 3000);
     }
 
     return () => {

@@ -10,6 +10,6 @@ import exampleJson from "@/constants/json/exampleComprehension.json";
 export async function getComprehensionSession(
   sessionReq: QuizSessionRequestBody
 ): Promise<ComprehensionExerciseSession> {
-  // return (await axios.post("/api/quiz-session", sessionReq)).data;
-  return Promise.resolve(exampleJson);
+  return (await axios.post("/api/quiz-session/comprehension", sessionReq)).data;
+  // return Promise.resolve(exampleJson);
 }

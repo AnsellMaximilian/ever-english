@@ -20,6 +20,9 @@ import useExerciseSession from "@/hooks/useExerciseSession";
 import useAuth from "@/hooks/useAuth";
 import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
+import Loading from "@/app/(authenticated)/quiz-session/Loading";
+import { getLvlByName } from "@/utils/level";
+import { shuffleArray } from "@/utils/common";
 
 export default function ComprehensionPage() {
   const [comprehensionSession, setComprehensionSession] =
@@ -40,20 +43,19 @@ export default function ComprehensionPage() {
 
   useEffect(() => {
     (async () => {
-      const convoSession = await getComprehensionSession({
-        concepts: [
-          "Greetings and introductions",
-          "Basic vocabulary for everyday objects (e.g., food, clothing, household items)",
-          "Numbers and counting",
-          "Days of the week, months, and telling time",
-          "Asking and answering simple questions",
-        ],
-        englishLevel: "A1",
-      });
+      if (currentAccount) {
+        const lvl = getLvlByName(currentAccount.userLevel.level, englishLevels);
+        if (lvl) {
+          const convoSession = await getComprehensionSession({
+            concepts: shuffleArray(lvl.concepts).slice(0, 5),
+            englishLevel: currentAccount.userLevel.level,
+          });
 
-      setComprehensionSession(convoSession);
+          setComprehensionSession(convoSession);
+        }
+      }
     })();
-  }, []);
+  }, [currentAccount]);
 
   const moveToNextConvo = () => {
     setCurrentTextIndex((prev) => prev + 1);
@@ -67,8 +69,8 @@ export default function ComprehensionPage() {
     currentTextIndex >= comprehensionSession.texts.length
   );
   return (
-    <div className="grow mx-auto container p-8">
-      {currentText && (
+    <div className="grow mx-auto container p-8 flex flex-col">
+      {currentText ? (
         <div className="">
           <div>
             <h1 className="text-4xl font-bold text-primary text-center">
@@ -115,6 +117,10 @@ export default function ComprehensionPage() {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="grow flex justify-center items-center">
+          <Loading />
         </div>
       )}
       <Dialog

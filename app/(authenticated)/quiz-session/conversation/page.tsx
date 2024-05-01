@@ -20,6 +20,9 @@ import useAuth from "@/hooks/useAuth";
 import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
 import { motion } from "framer-motion";
+import Loading from "@/app/(authenticated)/quiz-session/Loading";
+import { getLvlByName } from "@/utils/level";
+import { shuffleArray } from "@/utils/common";
 
 export default function ConversationPage() {
   const [conversationSession, setConversationSession] =
@@ -42,18 +45,19 @@ export default function ConversationPage() {
 
   useEffect(() => {
     (async () => {
-      const convoSession = await getConversationSession({
-        concepts: [
-          "Understanding complex and specialized texts in professional and academic domains",
-          "Analyzing and critiquing arguments and theories in written texts",
-          "Negotiating and mediating in professional and academic contexts",
-        ],
-        englishLevel: "C1",
-      });
+      if (currentAccount) {
+        const lvl = getLvlByName(currentAccount.userLevel.level, englishLevels);
 
-      setConversationSession(convoSession);
+        if (lvl) {
+          const convoSession = await getConversationSession({
+            concepts: shuffleArray(lvl.concepts).slice(0, 5),
+            englishLevel: currentAccount.userLevel.level,
+          });
+          setConversationSession(convoSession);
+        }
+      }
     })();
-  }, []);
+  }, [currentAccount]);
 
   const moveToNextConvo = () => {
     setCurrentConversationIndex((prev) => prev + 1);
@@ -72,8 +76,8 @@ export default function ConversationPage() {
     currentConversationIndex >= conversationSession.conversations.length
   );
   return (
-    <div className="grow mx-auto container p-8 overflow-hidden">
-      {currentConvo && (
+    <div className="grow mx-auto container p-8 overflow-hidden flex flex-col">
+      {currentConvo ? (
         <div className="">
           <div>
             <h1 className="text-4xl font-bold text-primary text-center">
@@ -165,6 +169,10 @@ export default function ConversationPage() {
               </div>
             )}
           </div>
+        </div>
+      ) : (
+        <div className="grow flex justify-center items-center">
+          <Loading />
         </div>
       )}
       <Dialog
