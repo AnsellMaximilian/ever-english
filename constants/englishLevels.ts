@@ -111,4 +111,4 @@ const englishLevels = [
   },
 ];
 
-export default englishLevels.reverse();
+export default englishLevels;

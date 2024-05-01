@@ -26,3 +26,29 @@ export const getUpdatedLevel = (xp: number, engLvls: typeof englishLevels) => {
 
   return level;
 };
+
+export const getSortedLevels = (
+  engLvls: typeof englishLevels,
+  asc: boolean = false
+) => {
+  return [...engLvls].sort(
+    (a, b) => (b.requiredXp - a.requiredXp) * (asc ? -1 : 1)
+  );
+};
+
+export const getNextLevel = (
+  currentXp: number,
+  engLvls: typeof englishLevels
+) => {
+  const sortedLevels = getSortedLevels(engLvls, true);
+  let nextLevel: null | (typeof engLvls)[number] = null;
+
+  for (let i = 0; i < sortedLevels.length; i++) {
+    const lvl = sortedLevels[i];
+    if (nextLevel === null && lvl.requiredXp > currentXp) {
+      nextLevel = lvl;
+    }
+  }
+
+  return nextLevel;
+};
