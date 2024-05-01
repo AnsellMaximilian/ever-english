@@ -75,7 +75,7 @@ export default function ComprehensionPage() {
             </p>
           </div>
           <div className="mt-8">
-            <div>{currentText.text}</div>
+            <div className="text-center">{currentText.text}</div>
           </div>
           <div className="mt-8">
             <div className="">

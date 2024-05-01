@@ -18,7 +18,7 @@ export default function QuizzSessionPage() {
     let timeoutId: NodeJS.Timeout;
     if (selectedTypeIndex !== null) {
       timeoutId = setTimeout(() => {
-        router.push("/quiz-session/arrange-sentence");
+        router.push(`/quiz-session/${exerciseTypes[selectedTypeIndex].url}`);
       }, 5000);
     }
 
@@ -28,8 +28,8 @@ export default function QuizzSessionPage() {
   }, [selectedTypeIndex, router]);
   return (
     <div className="grow flex items-center justify-center">
-      <div>
-        <div className="flex justify-center mt-16">
+      <div className="p-8">
+        <div className="flex justify-center">
           <ExerciseTypeWheel
             types={exerciseTypes}
             currentDisplayedSelectedIndex={currentDisplayedSelectedIndex}

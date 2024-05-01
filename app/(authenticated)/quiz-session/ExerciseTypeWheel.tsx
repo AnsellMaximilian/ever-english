@@ -20,7 +20,7 @@ export default function ExerciseTypeWheel({
           <div
             key={type.type}
             className={cn(
-              " border-border border-4 flex items-center justify-center rounded-md relative hover:bg-primary transition-all duration-100 cursor-pointer",
+              " border-border border-4 flex items-center justify-center rounded-md relative transition-all duration-100 cursor-pointer",
               index === 0
                 ? "rounded-tl-full"
                 : index === 1
