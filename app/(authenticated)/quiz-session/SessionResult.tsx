@@ -12,6 +12,8 @@ import {
 import { SessionResult as ISessionRes } from "@/types/helpers";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getXpFromSessionResult } from "@/utils/level";
+import CountUp from "react-countup";
 export default function SessionResult({
   open,
   onOpenChange,
@@ -51,7 +53,16 @@ export default function SessionResult({
           <div className="text-center">
             <div className="font-semibold text-xl">Total Correct</div>
             <div className="font-bold text-2xl">
-              {sessionResult.totalCorrect}
+              <CountUp end={sessionResult.totalCorrect} duration={1} />
+            </div>
+          </div>
+          <div className="rounded-md bg-accent text-accent-foreground p-4 flex justify-between">
+            <div>Total Earned XP</div>{" "}
+            <div className="font-bold">
+              <CountUp
+                end={getXpFromSessionResult(sessionResult)}
+                duration={1}
+              />
             </div>
           </div>
         </div>
