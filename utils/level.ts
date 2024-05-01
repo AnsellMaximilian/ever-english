@@ -54,5 +54,23 @@ export const getNextLevel = (
 };
 
 export const getLvlByName = (name: string, engLvls: typeof englishLevels) => {
-  return engLvls.find((lvl) => lvl.level === name);
+  const beginnerLvl: (typeof englishLevels)[number] = {
+    concepts: [
+      "Introduction to English Letters",
+      "Greetings and Simple Phrases",
+      "Numbers 1-10",
+      "Colors and Shapes",
+      "Everyday Objects",
+      "Basic Commands",
+      "Personal Pronouns",
+      "Introduction to Simple Present Tense",
+      "Family Members",
+      "Introduction to Days of the Week",
+    ],
+    level: "A0",
+    requiredXp: 0,
+  };
+
+  const foundLvl = engLvls.find((lvl) => lvl.level === name);
+  return foundLvl ? foundLvl : beginnerLvl;
 };
