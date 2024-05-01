@@ -24,7 +24,7 @@ export default function UserLevelModule() {
       <div className="mx-auto">
         <LevelBar totalXp={currentAccount?.userLevel.xp} />
       </div>
-      <div className="font-semibold">
+      <div className="font-semibold text-center">
         {nextLvl && currentAccount
           ? nextLvl.requiredXp - currentAccount.userLevel.xp
           : 0}{" "}

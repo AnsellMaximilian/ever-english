@@ -19,6 +19,7 @@ import useExerciseSession from "@/hooks/useExerciseSession";
 import useAuth from "@/hooks/useAuth";
 import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
+import { motion } from "framer-motion";
 
 export default function ConversationPage() {
   const [conversationSession, setConversationSession] =
@@ -71,7 +72,7 @@ export default function ConversationPage() {
     currentConversationIndex >= conversationSession.conversations.length
   );
   return (
-    <div className="grow mx-auto container p-8">
+    <div className="grow mx-auto container p-8 overflow-hidden">
       {currentConvo && (
         <div className="">
           <div>
@@ -87,26 +88,32 @@ export default function ConversationPage() {
               {currentConvo.dialog
                 .slice(0, conversationProgress + 1)
                 .map((convo, index) => {
+                  const isEven = index % 2 === 0;
+
                   return (
-                    <div
+                    <motion.div
+                      initial={{
+                        translateX: isEven ? 300 : -300,
+                      }}
+                      animate={{
+                        translateX: 0,
+                      }}
                       key={index}
                       className={cn(
                         "flex",
-                        index % 2 === 0 ? "justify-end" : "justify-start"
+                        isEven ? "justify-end" : "justify-start"
                       )}
                     >
                       <div
                         className={cn(
                           "p-4 text-primary-foreground rounded-md min-w-[400px] max-w-full",
-                          index % 2 === 0
-                            ? "bg-primary ml-8"
-                            : "bg-secondPrimary mr-8"
+                          isEven ? "bg-primary ml-8" : "bg-secondPrimary mr-8"
                         )}
                       >
                         <div className="font-semibold">{convo.name}</div>
                         <p>{convo.content || "________________________"}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
             </div>
