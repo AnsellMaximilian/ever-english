@@ -17,10 +17,15 @@ import SessionResult from "../SessionResult";
 import { useRouter } from "next/navigation";
 import type { SessionResult as ISessionRes } from "@/types/helpers";
 import useExerciseSession from "@/hooks/useExerciseSession";
+import useAuth from "@/hooks/useAuth";
+import { updateXpAndLevel } from "@/services/levels/level";
+import englishLevels from "@/constants/englishLevels";
 
 export default function ComprehensionPage() {
   const [comprehensionSession, setComprehensionSession] =
     useState<ComprehensionExerciseSession | null>(null);
+
+  const { currentAccount } = useAuth();
 
   const {
     currentExerciseIndex: currentTextIndex,
@@ -142,8 +147,15 @@ export default function ComprehensionPage() {
       <SessionResult
         open={isSessionFinished}
         sessionResult={sessionResult}
-        onOpenChange={(status) => {
+        onOpenChange={async (status) => {
           if (!status) {
+            if (currentAccount) {
+              await updateXpAndLevel(
+                sessionResult,
+                currentAccount.$id,
+                englishLevels
+              );
+            }
             router.push("/dashboard");
           }
         }}

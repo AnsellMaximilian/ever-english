@@ -16,10 +16,15 @@ import React, { useEffect, useState } from "react";
 import SessionResult from "../SessionResult";
 import { useRouter } from "next/navigation";
 import useExerciseSession from "@/hooks/useExerciseSession";
+import useAuth from "@/hooks/useAuth";
+import { updateXpAndLevel } from "@/services/levels/level";
+import englishLevels from "@/constants/englishLevels";
 
 export default function ConversationPage() {
   const [conversationSession, setConversationSession] =
     useState<ConversationExerciseSession | null>(null);
+
+  const { currentAccount } = useAuth();
 
   const [conversationProgress, setConversationProgress] = useState(0);
 
@@ -185,8 +190,15 @@ export default function ConversationPage() {
       <SessionResult
         open={isSessionFinished}
         sessionResult={sessionResult}
-        onOpenChange={(status) => {
+        onOpenChange={async (status) => {
           if (!status) {
+            if (currentAccount) {
+              await updateXpAndLevel(
+                sessionResult,
+                currentAccount.$id,
+                englishLevels
+              );
+            }
             router.push("/dashboard");
           }
         }}

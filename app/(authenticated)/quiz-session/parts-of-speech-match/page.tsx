@@ -19,6 +19,9 @@ import type { SessionResult as ISessionRes } from "@/types/helpers";
 import { shuffleArray } from "@/utils/common";
 import MatchButton from "./MatchButton";
 import useExerciseSession from "@/hooks/useExerciseSession";
+import useAuth from "@/hooks/useAuth";
+import { updateXpAndLevel } from "@/services/levels/level";
+import englishLevels from "@/constants/englishLevels";
 
 interface StringSelection {
   hasBeenSelected: boolean;
@@ -30,6 +33,8 @@ interface StringSelection {
 export default function PartsOfSpeechMatchPage() {
   const [conversationSession, setConversationSession] =
     useState<PartsOfSpeechMatchExerciseSession | null>(null);
+
+  const { currentAccount } = useAuth();
 
   const {
     currentExerciseIndex: currentMatchSetIndex,
@@ -295,8 +300,15 @@ export default function PartsOfSpeechMatchPage() {
       <SessionResult
         open={isSessionFinished}
         sessionResult={sessionResult}
-        onOpenChange={(status) => {
+        onOpenChange={async (status) => {
           if (!status) {
+            if (currentAccount) {
+              await updateXpAndLevel(
+                sessionResult,
+                currentAccount.$id,
+                englishLevels
+              );
+            }
             router.push("/dashboard");
           }
         }}

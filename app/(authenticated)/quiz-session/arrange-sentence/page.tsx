@@ -19,10 +19,15 @@ import type { SessionResult as ISessionRes } from "@/types/helpers";
 import { getArrangeSentenceSession } from "@/services/quiz-session/arrangeSentence";
 import { shuffleArray } from "@/utils/common";
 import useExerciseSession from "@/hooks/useExerciseSession";
+import useAuth from "@/hooks/useAuth";
+import { updateXpAndLevel } from "@/services/levels/level";
+import englishLevels from "@/constants/englishLevels";
 
 export default function ArrangeSentencePage() {
   const [conversationSession, setConversationSession] =
     useState<ArrangeSentenceExerciseSession | null>(null);
+
+  const { currentAccount } = useAuth();
 
   const {
     currentExerciseIndex: currentSentenceIndex,
@@ -195,8 +200,15 @@ export default function ArrangeSentencePage() {
       <SessionResult
         open={isSessionFinished}
         sessionResult={sessionResult}
-        onOpenChange={(status) => {
+        onOpenChange={async (status) => {
           if (!status) {
+            if (currentAccount) {
+              await updateXpAndLevel(
+                sessionResult,
+                currentAccount.$id,
+                englishLevels
+              );
+            }
             router.push("/dashboard");
           }
         }}
