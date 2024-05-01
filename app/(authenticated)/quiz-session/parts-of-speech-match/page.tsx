@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import type { SessionResult as ISessionRes } from "@/types/helpers";
 import { shuffleArray } from "@/utils/common";
 import MatchButton from "./MatchButton";
+import useExerciseSession from "@/hooks/useExerciseSession";
 
 interface StringSelection {
   hasBeenSelected: boolean;
@@ -30,16 +31,14 @@ export default function PartsOfSpeechMatchPage() {
   const [conversationSession, setConversationSession] =
     useState<PartsOfSpeechMatchExerciseSession | null>(null);
 
-  const [currentMatchSetIndex, setCurrentMatchSetIndex] = useState(0);
-
-  const [isCurrentResultCorrect, setIsCurrentResultCorrect] = useState<
-    null | boolean
-  >(null);
-
-  const [sessionResult, setSessionResult] = useState<ISessionRes>({
-    totalCorrect: 0,
-    resultDetails: [],
-  });
+  const {
+    currentExerciseIndex: currentMatchSetIndex,
+    setCurrentExerciseIndex: setCurrentMatchSetIndex,
+    isCurrentResultCorrect,
+    setIsCurrentResultCorrect,
+    sessionResult,
+    setSessionResult,
+  } = useExerciseSession();
 
   const [currentPartsOfSpeech, setCurrentPartsOfSpeech] = useState<
     StringSelection[]
@@ -49,8 +48,6 @@ export default function PartsOfSpeechMatchPage() {
   // matching
   const [currentWordIndex, setCurrentWordIndex] = useState(-1);
   const [currentPartIndex, setCurrentPartIndex] = useState(-1);
-
-  const [isCurrentSetCorrect, setIsCurrentSetCorrect] = useState(false);
 
   const router = useRouter();
 

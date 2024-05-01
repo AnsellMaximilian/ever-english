@@ -15,24 +15,22 @@ import { ConversationExerciseSession } from "@/types/api";
 import React, { useEffect, useState } from "react";
 import SessionResult from "../SessionResult";
 import { useRouter } from "next/navigation";
-import type { SessionResult as ISessionRes } from "@/types/helpers";
+import useExerciseSession from "@/hooks/useExerciseSession";
 
 export default function ConversationPage() {
   const [conversationSession, setConversationSession] =
     useState<ConversationExerciseSession | null>(null);
 
-  const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
-
   const [conversationProgress, setConversationProgress] = useState(0);
 
-  const [isCurrentResultCorrect, setIsCurrentResultCorrect] = useState<
-    null | boolean
-  >(null);
-
-  const [sessionResult, setSessionResult] = useState<ISessionRes>({
-    totalCorrect: 0,
-    resultDetails: [],
-  });
+  const {
+    currentExerciseIndex: currentConversationIndex,
+    setCurrentExerciseIndex: setCurrentConversationIndex,
+    isCurrentResultCorrect,
+    setIsCurrentResultCorrect,
+    sessionResult,
+    setSessionResult,
+  } = useExerciseSession();
 
   const router = useRouter();
 

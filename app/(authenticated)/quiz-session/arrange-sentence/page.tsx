@@ -18,25 +18,24 @@ import { useRouter } from "next/navigation";
 import type { SessionResult as ISessionRes } from "@/types/helpers";
 import { getArrangeSentenceSession } from "@/services/quiz-session/arrangeSentence";
 import { shuffleArray } from "@/utils/common";
+import useExerciseSession from "@/hooks/useExerciseSession";
 
 export default function ArrangeSentencePage() {
   const [conversationSession, setConversationSession] =
     useState<ArrangeSentenceExerciseSession | null>(null);
 
-  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-
-  const [isCurrentResultCorrect, setIsCurrentResultCorrect] = useState<
-    null | boolean
-  >(null);
+  const {
+    currentExerciseIndex: currentSentenceIndex,
+    setCurrentExerciseIndex: setCurrentSentenceIndex,
+    isCurrentResultCorrect,
+    setIsCurrentResultCorrect,
+    sessionResult,
+    setSessionResult,
+  } = useExerciseSession();
 
   const [shuffledSentence, setShuffledSentence] = useState<string[]>([]);
 
   const [formedSentence, setFormedSentence] = useState<string[]>([]);
-
-  const [sessionResult, setSessionResult] = useState<ISessionRes>({
-    totalCorrect: 0,
-    resultDetails: [],
-  });
 
   const router = useRouter();
 
@@ -95,7 +94,13 @@ export default function ArrangeSentencePage() {
         ],
       }));
     }
-  }, [formedSentence, shuffledSentence, currentSentence]);
+  }, [
+    formedSentence,
+    shuffledSentence,
+    currentSentence,
+    setSessionResult,
+    setIsCurrentResultCorrect,
+  ]);
   return (
     <div className="grow mx-auto container p-8">
       {currentSentence && (

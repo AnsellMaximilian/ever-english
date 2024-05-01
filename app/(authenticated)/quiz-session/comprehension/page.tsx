@@ -16,21 +16,20 @@ import React, { useEffect, useState } from "react";
 import SessionResult from "../SessionResult";
 import { useRouter } from "next/navigation";
 import type { SessionResult as ISessionRes } from "@/types/helpers";
+import useExerciseSession from "@/hooks/useExerciseSession";
 
 export default function ComprehensionPage() {
   const [comprehensionSession, setComprehensionSession] =
     useState<ComprehensionExerciseSession | null>(null);
 
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-
-  const [isCurrentResultCorrect, setIsCurrentResultCorrect] = useState<
-    null | boolean
-  >(null);
-
-  const [sessionResult, setSessionResult] = useState<ISessionRes>({
-    totalCorrect: 0,
-    resultDetails: [],
-  });
+  const {
+    currentExerciseIndex: currentTextIndex,
+    setCurrentExerciseIndex: setCurrentTextIndex,
+    isCurrentResultCorrect,
+    setIsCurrentResultCorrect,
+    sessionResult,
+    setSessionResult,
+  } = useExerciseSession();
 
   const router = useRouter();
 
