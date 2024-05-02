@@ -5,10 +5,11 @@ import {
 } from "@google/generative-ai";
 import { removeJsonWrapper } from "./processJSONResponse";
 import axios from "axios";
+import { GeminiKeyReq } from "@/types/api";
 
 export default async function requestGemini(parts: { text: string }[]) {
-  const apiKey = (await axios.get("/api/gemini")).data;
-  const genAI = new GoogleGenerativeAI(apiKey as string);
+  const geminiKeyReq: GeminiKeyReq = (await axios.get("/api/gemini")).data;
+  const genAI = new GoogleGenerativeAI(geminiKeyReq.geminiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
   const generationConfig = {

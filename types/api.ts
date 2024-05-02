@@ -42,6 +42,10 @@ export interface ComprehensionExerciseSession extends ExerciseSession {
   }[];
 }
 
+export interface GeminiKeyReq {
+  geminiKey: string;
+}
+
 export interface ArrangeSentenceExerciseSession extends ExerciseSession {
   sentences: {
     concept: string;
