@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ever English
 
-## Getting Started
+## Gallery
 
-First, run the development server:
+### Landing page
+![ever-english-1hj84wwsv-ansellmaximilians-projects vercel app_](https://github.com/AnsellMaximilian/ever-english/assets/56351143/4d77bf46-581e-46e1-81db-5ba515fafb13)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Dashboard
+![dashboard](https://github.com/AnsellMaximilian/ever-english/assets/56351143/0a5a8c91-9d9c-4f30-8659-0cf685d972da)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Generating Exercise
+![loading](https://github.com/AnsellMaximilian/ever-english/assets/56351143/bc4da015-41d5-4276-81d5-52a5a44d0e51)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Sentence Arrangement Exercise
+![arrange-sentence](https://github.com/AnsellMaximilian/ever-english/assets/56351143/e0895082-9c0d-4a7f-a50c-fd58bf34554c)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Conversation Exercise
+![conversation-top](https://github.com/AnsellMaximilian/ever-english/assets/56351143/7e794b4b-1efe-485f-bb8d-74cedd833f10)
 
-## Learn More
+### Comprehension Exercise
+![comprehension](https://github.com/AnsellMaximilian/ever-english/assets/56351143/7da5d18c-6520-49fb-92d4-485ec1d64790)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Parts of Speech Match Exercise
