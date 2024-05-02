@@ -21,3 +21,4 @@
 ![comprehension](https://github.com/AnsellMaximilian/ever-english/assets/56351143/7da5d18c-6520-49fb-92d4-485ec1d64790)
 
 ### Parts of Speech Match Exercise
+![parts-of-speech](https://github.com/AnsellMaximilian/ever-english/assets/56351143/b3e61caa-f4a4-4ebb-8ea0-ff13432e72b8)
