@@ -1,4 +1,3 @@
-"use client";
 import DashboardModule from "@/components/DashboardModule";
 import Header from "@/components/Header";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -10,13 +9,9 @@ import Image from "next/image";
 import useAuth from "@/hooks/useAuth";
 import LevelUpDialog from "./LevelUpDialog";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 function Dashboard() {
-  const { currentAccount } = useAuth();
-  const searchParams = useSearchParams();
-
-  const prevLvl = searchParams.get("prevLvl");
-
   return (
     <div>
       <Header />
@@ -53,11 +48,11 @@ function Dashboard() {
           </div>
         </div>
       </main>
-      {currentAccount &&
-        prevLvl &&
-        prevLvl != currentAccount.userLevel.level && (
-          <LevelUpDialog level={currentAccount.userLevel} />
-        )}
+      <LevelUpDialog />
+
+      <Suspense fallback={<></>}>
+        <LevelUpDialog />
+      </Suspense>
     </div>
   );
 }
