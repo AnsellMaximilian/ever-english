@@ -1,14 +1,12 @@
 import DashboardModule from "@/components/DashboardModule";
 import Header from "@/components/Header";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import UserLevelModule from "./UserLevelModule";
 import hero from "@/assets/images/session-hero.svg";
 import Image from "next/image";
-import useAuth from "@/hooks/useAuth";
 import LevelUpDialog from "./LevelUpDialog";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 function Dashboard() {
@@ -48,8 +46,6 @@ function Dashboard() {
           </div>
         </div>
       </main>
-      <LevelUpDialog />
-
       <Suspense fallback={<></>}>
         <LevelUpDialog />
       </Suspense>
