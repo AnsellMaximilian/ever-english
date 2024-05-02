@@ -2,13 +2,10 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import wave from "@/assets/images/wave.svg";
 import icon from "@/assets/images/icon.svg";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import logofull from "@/assets/images/logo-full-horizontal.svg";
-import { account } from "@/appwrite";
 import dashboardSs from "@/assets/images/screenshots/dashboard.png";
-import loadingSs from "@/assets/images/screenshots/loading.png";
 
 export default async function Home() {
   return (
@@ -87,7 +84,7 @@ export default async function Home() {
             </g>
             <path
               className="fill-secondPrimary"
-              fill-opacity="1"
+              fillOpacity="1"
               d="M0,224L30,186.7C60,149,120,75,180,85.3C240,96,300,192,360,208C420,224,480,160,540,117.3C600,75,660,53,720,74.7C780,96,840,160,900,176C960,192,1020,160,1080,170.7C1140,181,1200,235,1260,224C1320,213,1380,139,1410,101.3L1440,64L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"
               id="path140"
             />

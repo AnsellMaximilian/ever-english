@@ -1,3 +1,5 @@
+"use client";
+
 import DashboardModule from "@/components/DashboardModule";
 import Header from "@/components/Header";
 import { buttonVariants } from "@/components/ui/button";
@@ -7,9 +9,12 @@ import UserLevelModule from "./UserLevelModule";
 import hero from "@/assets/images/session-hero.svg";
 import Image from "next/image";
 import LevelUpDialog from "./LevelUpDialog";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 function Dashboard() {
+  useProtectedPage();
   return (
     <div>
       <Header />

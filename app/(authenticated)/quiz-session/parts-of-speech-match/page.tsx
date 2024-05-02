@@ -24,6 +24,7 @@ import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
 import Loading from "@/app/(authenticated)/quiz-session/Loading";
 import { getLvlByName } from "@/utils/level";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 interface StringSelection {
   hasBeenSelected: boolean;
@@ -33,6 +34,7 @@ interface StringSelection {
 }
 
 export default function PartsOfSpeechMatchPage() {
+  useProtectedPage();
   const [conversationSession, setConversationSession] =
     useState<PartsOfSpeechMatchExerciseSession | null>(null);
 

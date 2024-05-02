@@ -23,8 +23,11 @@ import englishLevels from "@/constants/englishLevels";
 import Loading from "@/app/(authenticated)/quiz-session/Loading";
 import { getLvlByName } from "@/utils/level";
 import { shuffleArray } from "@/utils/common";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 export default function ComprehensionPage() {
+  useProtectedPage();
+
   const [comprehensionSession, setComprehensionSession] =
     useState<ComprehensionExerciseSession | null>(null);
 

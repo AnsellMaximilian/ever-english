@@ -13,13 +13,14 @@ export interface User extends Models.User<Models.Preferences> {
 
 export default function useAuth() {
   const [currentAccount, setCurrentAccount] = useState<null | User>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
   const pathname = usePathname();
 
   const getSession = async () => {
     try {
+      setIsLoading(true);
       const acc = await account.get();
 
       const userLevel: UserLevel = await databases.getDocument(

@@ -24,8 +24,11 @@ import { updateXpAndLevel } from "@/services/levels/level";
 import englishLevels from "@/constants/englishLevels";
 import Loading from "@/app/(authenticated)/quiz-session/Loading";
 import { getLvlByName } from "@/utils/level";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 export default function ArrangeSentencePage() {
+  useProtectedPage();
+
   const [conversationSession, setConversationSession] =
     useState<ArrangeSentenceExerciseSession | null>(null);
 

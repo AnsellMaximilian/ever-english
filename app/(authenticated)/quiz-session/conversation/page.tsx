@@ -23,8 +23,11 @@ import { motion } from "framer-motion";
 import Loading from "@/app/(authenticated)/quiz-session/Loading";
 import { getLvlByName } from "@/utils/level";
 import { shuffleArray } from "@/utils/common";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 export default function ConversationPage() {
+  useProtectedPage();
+
   const [conversationSession, setConversationSession] =
     useState<ConversationExerciseSession | null>(null);
 
